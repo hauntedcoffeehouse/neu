@@ -19,36 +19,46 @@ type DialogType = {
 
 const Dialog = ({
   message,
-  width,
+  width = "fit",
   cancelButtonText,
   actionButtonText,
   actionButtonColor,
   className,
 }: DialogType) => {
+  const renderCancelButton = () => {
+    if (!cancelButtonText) return null;
+    return <button className="text-base">{cancelButtonText}</button>;
+  };
+
+  const renderActionButton = () => {
+    if (!actionButtonText) return null;
+    return (
+      <Button
+        buttonText={actionButtonText}
+        rounded="full"
+        color={actionButtonColor}
+      />
+    );
+  };
+
   return (
     <div
       className={classNames(
         "w-72 md:w-80 px-8 py-4 bg-white border-4 border-black shadow-[8px_8px_0px_rgba(0,0,0,1)] grid place-content-center",
-        { "w-fit": width === "fit" },
-        { "w-full": width === "full" },
-        { "w-1/2": width === "1/2" },
-        { "w-1/3": width === "1/3" },
+        {
+          "w-fit": width === "fit",
+          "w-full": width === "full",
+          "w-1/2": width === "1/2",
+          "w-1/3": width === "1/3",
+        },
         className
       )}
     >
       <div>
         <h1 className="text-2xl mb-4">{message}</h1>
         <div className="flex space-x-2 mx-auto w-32">
-          {cancelButtonText && (
-            <button className="text-base">{cancelButtonText}</button>
-          )}
-          {actionButtonText && (
-            <Button
-              buttonText={actionButtonText}
-              rounded="full"
-              color={actionButtonColor && actionButtonColor}
-            />
-          )}
+          {renderCancelButton()}
+          {renderActionButton()}
         </div>
       </div>
     </div>
