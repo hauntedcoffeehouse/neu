@@ -116,6 +116,6 @@ export const Cyan: Story = {
 
 export const Children: Story = {
   args: {
-    children: React.createElement("p", null, "button"),
+    children: React.createElement("p", null, "buttons"),
   },
 }
