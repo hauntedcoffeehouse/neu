@@ -1,13 +1,14 @@
-import classNames from "classnames";
+import classNames from "classnames"
 
 type ButtonType = {
-  buttonText: string;
-  rounded?: "none" | "md" | "full";
-  size?: "sm" | "md" | "lg";
-  color?: "violet" | "pink" | "red" | "orange" | "yellow" | "lime" | "cyan";
-  disabled?: boolean;
-  className?: string;
-};
+  buttonText?: string
+  rounded?: "none" | "md" | "full"
+  size?: "sm" | "md" | "lg"
+  color?: "violet" | "pink" | "red" | "orange" | "yellow" | "lime" | "cyan"
+  disabled?: boolean
+  className?: string
+  children?: React.ReactNode
+}
 
 const Button = ({
   buttonText = "Enabled",
@@ -16,6 +17,7 @@ const Button = ({
   color = "cyan",
   disabled,
   className,
+  children,
 }: ButtonType) => {
   return (
     <button
@@ -64,9 +66,9 @@ const Button = ({
       )}
       disabled={disabled}
     >
-      {buttonText}
+      {!children ? buttonText : children}
     </button>
-  );
-};
+  )
+}
 
-export default Button;
+export default Button
