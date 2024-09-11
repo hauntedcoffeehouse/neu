@@ -1,13 +1,26 @@
-import classNames from "classnames";
+import classNames from "classnames"
 
-type ButtonType = {
-  buttonText: string;
-  rounded?: "none" | "md" | "full";
-  size?: "sm" | "md" | "lg";
-  color?: "violet" | "pink" | "red" | "orange" | "yellow" | "lime" | "cyan";
-  disabled?: boolean;
-  className?: string;
-};
+type ButtonPropsBase = {
+  buttonText?: string
+  rounded?: "none" | "md" | "full"
+  size?: "sm" | "md" | "lg"
+  color?: "violet" | "pink" | "red" | "orange" | "yellow" | "lime" | "cyan"
+  disabled?: boolean
+  className?: string
+  children?: React.ReactNode
+}
+
+type ButtonTextProps = ButtonPropsBase & {
+  buttonText: string
+  children?: never
+}
+
+type ButtonChildrenProps = ButtonPropsBase & {
+  children: React.ReactNode
+  buttonText?: never
+}
+
+type ButtonType = ButtonTextProps | ButtonChildrenProps
 
 const Button = ({
   buttonText = "Enabled",
@@ -16,7 +29,10 @@ const Button = ({
   color = "cyan",
   disabled,
   className,
+  children,
 }: ButtonType) => {
+  const buttonLabel = children || buttonText
+
   return (
     <button
       className={classNames(
@@ -64,9 +80,9 @@ const Button = ({
       )}
       disabled={disabled}
     >
-      {buttonText}
+      {buttonLabel}
     </button>
-  );
-};
+  )
+}
 
-export default Button;
+export default Button
